@@ -2,25 +2,41 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!-- 本番バージョン、サイズと速度のために最適化されています >
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script-->
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 		<title>sign_in</title>
 	</head>
 	<body>
-		<script type="text/javascript">
-$(document).ready(function() {
-	$('#submitForm').submit(function(e) {
-		alert($('#mail').attr('value'));
-		alert($('#password').attr('value'));
-		return e.preventDefault();
-	});
-});
+
+		<div id="login_form">
+			<input type="text" name="mail" v-model="mail" placeholder="mail">
+			{{ mail }}
+			<br>
+			<input type="text" name="password" v-model="password" placeholder="password">
+			{{ password }}
+			<button v-on:click="button_login">ログイン</button>
+		</div>
+
+		<script>
+var view_oauth_user = new Vue({
+	el: "#login_form",
+	data:{
+		mail:"",
+		password:"",
+	},
+	methods: {
+		button_login() {
+			axios.post('http://localhost:4567/sign_in', {
+				mail: view_oauth_user.mail,
+				password: view_oauth_user.password,
+			}.tojson)
+		}
+	}
+})
 		</script>
-
-		<form id="submitForm" method="post">
-			<input type="text" name="mail" id="mail" placeholder="mail"  />
-			<input type="text" name="password" id="password" placeholder="password"  />
-			<input type="submit" id="submitBtn" value="Login" />
-		</form>
-
 	</body>
-</html>
+	<erTL Starbucks_Jhtml>

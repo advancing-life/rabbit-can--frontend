@@ -6,10 +6,23 @@
 		<title>index</title>
 	</head>
 	<body>
+		<form id="submit_logout">
+			<input type="submit" id="submitBtn" value="Logout" />
+		</form>
 
-		<textarea class="lined" name="body" rows="10" cols="100">ここを変数にしてコードを表示</textarea></p>
+		<textarea class="lined" name="body" rows="10" cols="100">error</textarea></p>
 
 
+
+
+		<script type="text/javascript">
+$(document).ready(function() {
+	$('#submit_logout').submit(function(e) {
+		window.sessionStorage.clear();
+		alert("Completion logout");
+	});
+});
+		</script>
 
 		<script>
 $(document).ready(function(){

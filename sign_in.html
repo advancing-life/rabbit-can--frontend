@@ -30,10 +30,10 @@ var view_oauth_user = new Vue({
 	},
 	methods: {
 		button_login() {
-			axios.post('http://localhost:4567/sign_in', {
+			axios.post('http://localhost:4567/sign_in', JSON.stringify({
 				mail: view_oauth_user.mail,
 				password: view_oauth_user.password,
-			}.tojson)
+			}))
 		}
 	}
 })

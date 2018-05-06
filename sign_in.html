@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<title>sign_in</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+$(document).ready(function() {
+	$('#submitForm').submit(function(e) {
+		alert($('#mail').attr('value'));
+		alert($('#password').attr('value'));
+		return e.preventDefault();
+	});
+});
+		</script>
+
+		<form id="submitForm" method="post">
+			<input type="text" name="mail" id="mail" placeholder="mail"  />
+			<input type="text" name="password" id="password" placeholder="password"  />
+			<input type="submit" id="submitBtn" value="Login" />
+		</form>
+
+	</body>
+</html>

@@ -1,0 +1,1 @@
+#rabbit-can--frontend

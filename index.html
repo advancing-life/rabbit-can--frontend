@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<title>index</title>
+	</head>
+	<body>
+
+		<textarea class="lined" name="body" rows="10" cols="100">ここを変数にしてコードを表示</textarea></p>
+
+
+
+		<script>
+$(document).ready(function(){
+	//$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+	$.getJSON("http://localhost:4567/show",
+		{
+			format: "json"
+		},
+		function(unti) {
+			$("textarea").val(unti.title);
+		});
+});
+		</script>
+
+	</body>
+</html>

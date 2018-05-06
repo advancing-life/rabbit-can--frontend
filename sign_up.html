@@ -1,11 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-	<title>sign_up</title>
-</head>
-<body>
-	
-</body>
-</html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<!-- 本番バージョン、サイズと速度のために最適化されています >
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script-->
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+		<title>sign_up</title>
+	</head>
+	<body>
+
+		<div id="sign_up_form">
+			<input type="text" name="mail" v-model="mail" placeholder="mail">
+			{{ mail }}
+			<br>
+			<input type="text" name="password" v-model="password" placeholder="password">
+			<!--パスワードの確認を作成予定-->
+			{{ password }}
+			<button v-on:click="button_sign_up">登録</button>
+		</div>
+
+		<script>
+var view_oauth_user = new Vue({
+	el: "#sign_up_form",
+	data:{
+		mail:"",
+		password:"",
+	},
+	methods: {
+		button_sign_up() {
+			axios.post('http://localhost:4567/sign_up', JSON.stringify({
+				mail: view_oauth_user.mail,
+				password: view_oauth_user.password,
+			}))
+		}
+	}
+})
+		</script>
+	</body>
+	<erTL Starbucks_Jhtml>

@@ -39,7 +39,7 @@ var view_oauth_user = new Vue({
       var shaObj = new jsSHA("SHA-256", "TEXT");
       shaObj.update(pass);
       var passhash = shaObj.getHash("HEX");
-      alert(passhash);
+      //alert(passhash);
       //リクエスト送受信部分
       axios.post('http://localhost:4567/sign_up', JSON.stringify({
         mail: view_oauth_user.mail,

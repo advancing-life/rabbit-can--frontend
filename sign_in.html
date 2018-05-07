@@ -2,6 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<!--js sha-2 js 読み込み-->
+    <script src="./public/assets/jsSHA-master/src/sha256.js"></script>
 		<!-- 開発バージョン、便利なコンソールの警告が含まれています -->
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<!-- 本番バージョン、サイズと速度のために最適化されています >
@@ -22,6 +24,15 @@
 		</div>
 
 		<script>
+//sha-2暗号化
+var pass = "passworddayo";
+var shaObj = new jsSHA("SHA-256", "TEXT");
+shaObj.update(pass);
+var passhash = shaObj.getHash("HEX");
+alert(passhash);
+		</script>
+
+		<script>
 var view_oauth_user = new Vue({
 	el: "#login_form",
 	data:{
@@ -30,10 +41,17 @@ var view_oauth_user = new Vue({
 	},
 	methods: {
 		button_login() {
+
 			axios.post('http://localhost:4567/sign_in', JSON.stringify({
 				mail: view_oauth_user.mail,
 				password: view_oauth_user.password,
 			}))
+				.then(function (response) {
+					console.log(response);
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 		}
 	}
 })

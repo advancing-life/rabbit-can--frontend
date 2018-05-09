@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<title></title>
+	<meta charset="UTF-8">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<title></title>
 	</head>
 	<body>
 
@@ -25,4 +25,31 @@ var manco = new Vue ({
 
 
 	</body>
-</html>
+	</html-->
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8">
+			<title></title>
+		</head>
+		<body>
+			<script>
+
+
+
+
+$(document).ready(function(){
+	//$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+	$.getJSON("http://localhost:4567/show",
+		{
+			format: "json"
+		},
+		function(unti) {
+			$("textarea").val(unti.title);
+		});
+});
+			</script>
+
+
+		</body>
+	</html>

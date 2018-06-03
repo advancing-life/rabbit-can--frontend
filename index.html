@@ -1,41 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-		<title>index</title>
-	</head>
-	<body>
-		<form id="submit_logout">
-			<input type="submit" id="submitBtn" value="Logout" />
-		</form>
 
-		<textarea class="lined" name="body" rows="10" cols="100">error</textarea></p>
+  <head>
+    <meta charset="UTF-8">
+    <!--js sha-2 js 読み込み-->
+    <script src="./public/assets/jsSHA-master/src/sha256.js"></script>
+    <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 本番バージョン、サイズと速度のために最適化されています -->
+    <!--script src="https://cdn.jsdelivr.net/npm/vue"></script-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <title>sign_up</title>
+  </head>
+  <body>
+    <div id="index">
+      <div v-if="display">
+        <button v-on:click="button_logout">logout</button>
+        <h2>HELLO, {{ name }}</h2>
+      </div>
+      <div v-else>
+        <center><h1>Prease login</h1></center>
+        <a href=" sign_in.html">既にアカウントのお持ちの方</a><br>
+        <a href=" sign_up.html">新規登録</a>
+      </div>
+    </div>
+
+    <script>
+      var view_index= new Vue({
+        el: "#index",
+        data: {
+          display:false,
+          name:""
+        },
+        methods: {
+          button_logout() {
+            window.sessionStorage.clear();
+            window.location = "sign_in.html";
+          }
+        },
+        mounted: function () {
+          this.$nextTick(function () {
+            // ビュー全体がレンダリングされた後にのみ実行されるコード
+            var mail = window.sessionStorage.getItem(["key_mail"]);
+            var u_id = window.sessionStorage.getItem(["key_id"]);
+            console.log(mail);
+            console.log(u_id);
+
+            axios.post('http://localhost:4567/check_id', JSON.stringify({
+              mail: mail,
+              u_id: u_id,
+            }))
+              .then(function (response) {
+                // window.sessionStorage.setItem(["key_mail"],[response.data.mail]);
+                //window.sessionStorage.setItem(["key_id"],[response.data.u_id]);
+                if(response.status = 201){
+                  console.log(response);
+                  view_index.display = true;
+                  view_index.name = response.data.name;
+                }
+                else{
+                }
+              })
+              .catch(function (error) {
+              });
+          })
+        }
+      })
+    </script>
 
 
-
-
-		<script type="text/javascript">
-$(document).ready(function() {
-	$('#submit_logout').submit(function(e) {
-		window.sessionStorage.clear();
-		alert("Completion logout");
-	});
-});
-		</script>
-
-		<script>
-$(document).ready(function(){
-	//$.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
-	$.getJSON("http://localhost:4567/show",
-		{
-			format: "json"
-		},
-		function(unti) {
-			$("textarea").val(unti.title);
-		});
-});
-		</script>
-
-	</body>
+  </body>
 </html>

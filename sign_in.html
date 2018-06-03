@@ -20,7 +20,8 @@
       <br>
       <input type="password" name="password" v-model="password" placeholder="password">
       {{ password }}
-      <button v-on:click="button_login">ログイン</button>
+      <button v-on:click="button_login">ログイン</button><br>
+      {{ message }}
     </div>
 
     <a href="index.html">index</a>
@@ -31,6 +32,7 @@ var view_oauth_user = new Vue({
   data:{
     mail:"",
     password:"",
+    message:""
   },
   methods: {
     button_login() {
@@ -58,6 +60,7 @@ var view_oauth_user = new Vue({
 
         })
         .catch(function (error) {
+          view_oauth_user.message = error.response.data.msg
           console.log(error);
         });
     }

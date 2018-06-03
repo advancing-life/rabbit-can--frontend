@@ -6,9 +6,9 @@
     <script src="./public/assets/jsSHA-master/src/sha256.js"></script>
     <!-- 開発バージョン、便利なコンソールの警告が含まれています -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <!-- 本番バージョン、サイズと速度のために最適化されています >
-      <script src="https://cdn.jsdelivr.net/npm/vue"></script-->
-      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <!-- 本番バージョン、サイズと速度のために最適化されています -->
+    <!--script src="https://cdn.jsdelivr.net/npm/vue"></script-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
       <title>sign_up</title>
   </head>
@@ -18,11 +18,15 @@
       <input type="text" name="mail" v-model="mail" placeholder="mail">
       {{ mail }}
       <br>
+      <input type="text" name="username" v-model="username" placeholder="username">
+      {{ username }}
+      <br>
       <input type="password" name="password" v-model="password" placeholder="password">
       <!--パスワードの確認を作成予定-->
       {{ password }}
       <button v-on:click="button_sign_up">登録</button>
     </div>
+    <a href="index.html">index</a>
 
     <script>
 //sign_up
@@ -30,6 +34,7 @@ var view_oauth_user = new Vue({
   el: "#sign_up_form",
   data:{
     mail:"",
+    username:"",
     password:"",
   },
   methods: {
@@ -44,12 +49,21 @@ var view_oauth_user = new Vue({
       axios.post('http://localhost:4567/sign_up', JSON.stringify({
         mail: view_oauth_user.mail,
         password: passhash,
+        username: view_oauth_user.username,
       }))
         .then(function (response) {
           console.log(response);
+          //response.status == 201
+          window.sessionStorage.setItem(["key_mail"],[response.data.mail]);
+          window.sessionStorage.setItem(["key_id"],[response.data.u_id]);
+          window.location = "index.html";
+          //var a = window.sessionStorage.getItem(["key_mail"]);
+          //var b = window.sessionStorage.getItem(["key_id"]);
+          //console.log(a);    // => value1
+          //console.log(b);    // => value1
         })
         .catch(function (error) {
-          console.log(error);
+          //console.log(error);
         });
     }
   }

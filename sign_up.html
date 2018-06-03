@@ -51,10 +51,13 @@ var view_oauth_user = new Vue({
         username: view_oauth_user.username,
       }))
         .then(function (response) {
-          //console.log(response);
-          window.sessionStorage.setItem([response.data.mail],[response.data.id]);
-          var a = window.sessionStorage.getItem([response.data.mail]);
+          console.log(response);
+          window.sessionStorage.setItem(["key_mail"],[response.data.mail]);
+          window.sessionStorage.setItem(["key_id"],[response.data.id]);
+          var a = window.sessionStorage.getItem(["key_mail"]);
+          var b = window.sessionStorage.getItem(["key_id"]);
           console.log(a);    // => value1
+          console.log(b);    // => value1
         })
         .catch(function (error) {
           //console.log(error);
